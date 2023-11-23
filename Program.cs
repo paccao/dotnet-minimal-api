@@ -24,7 +24,7 @@ var books = new List<Book> {
 };
 
 app.MapGet("/book", () => {
-    return books;
+    return books.OrderBy(b => b.Id);
 });
 
 app.MapGet("/book/{id}", (int id) => {
