@@ -44,6 +44,15 @@ app.MapPost("/book", (Book book) => {
     return Results.Ok("Book was added successfully.");
 });
 
+app.MapPut("/book/{id}", (Book updatedBook, int id) => {
+    var book = books.Find(b => b.Id == id);
+    if(book is null) return Results.NotFound("This book does not exist.");
+
+    book.Title = updatedBook.Title;
+    book.Author = updatedBook.Author;
+    return Results.Ok(book);
+});
+
 app.Run();
 
 class Book
