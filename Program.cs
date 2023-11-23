@@ -27,6 +27,13 @@ app.MapGet("/book", () => {
     return books;
 });
 
+app.MapGet("/book/{id}", (int id) => {
+    var book = books.Find(b => b.Id == id);
+    if(book is null) return Results.NotFound("This book does not exist.");
+
+    return Results.Ok(book);
+});
+
 app.Run();
 
 class Book
