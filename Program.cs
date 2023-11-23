@@ -34,6 +34,16 @@ app.MapGet("/book/{id}", (int id) => {
     return Results.Ok(book);
 });
 
+app.MapPost("/book", (Book book) => {
+    if (book is null) return Results.BadRequest("Missing details of book to add.");
+    var bookExists = books.Find((b) => b.Id == book.Id);
+    if (bookExists != null) return Results.BadRequest("The Id you specified already exists.");
+    
+    books.Add(book);
+    
+    return Results.Ok("Book was added successfully.");
+});
+
 app.Run();
 
 class Book
