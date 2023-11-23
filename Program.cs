@@ -23,8 +23,16 @@ var books = new List<Book> {
     new Book { Id = 4, Title = "The Martian", Author = "Andy Weir"},
 };
 
-app.MapGet("/book", () => {
-    return books.OrderBy(b => b.Id);
+app.MapGet("/book", (SortingOption sortingOption = SortingOption.Default) => {
+    switch (sortingOption)
+    {
+        case SortingOption.Ascending:
+            return Results.Ok(books.OrderBy(b => b.Id));
+        case SortingOption.Descending:
+            return Results.Ok(books.OrderByDescending(b => b.Id));
+        default:
+            return Results.Ok(books);
+    }
 });
 
 app.MapGet("/book/{id}", (int id) => {
@@ -68,4 +76,11 @@ class Book
     public int Id { get; set; }
     public required string Title { get; set; }
     public required string Author { get; set; }
+}
+
+public enum SortingOption
+{
+    Default,
+    Ascending,
+    Descending
 }
