@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <InvariantGlobalization>true</InvariantGlobalization>
-    <RootNamespace>dotnet_minimal_api</RootNamespace>
+    <RootNamespace>MinimalApi</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
